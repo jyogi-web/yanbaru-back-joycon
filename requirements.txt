@@ -1,1 +1,5 @@
 Flask==2.3.3
+joycon-python==0.2.4
+glm==0.4.4
+PyGLM==2.7.2
+hidapi==0.14.0.post2
