@@ -7,11 +7,11 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
-# ↓ /scrapingをGETメソッドで受け取った時の処理
+# ↓ /joyconをGETメソッドで受け取った時の処理
 @app.route('/joycon')
 def get():
     print("joycon")
-    # ↓　実行したいファイルの関数
+    # ↓実行したいファイルの関数
     return joycon.Joycon()
 
 if __name__ == '__main__':
