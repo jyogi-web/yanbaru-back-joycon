@@ -1,22 +1,36 @@
 from pyjoycon import JoyCon, get_R_id
 import time
 
-# 左Joy-Conの取得
-joycon_id = get_R_id()
-joycon = JoyCon(*joycon_id)
+# 得点を初期化
+score = 0
 
-while True:
-    # ジャイロデータを取得
-    gyro = joycon.get_status()['gyro']
-    accel = joycon.get_status()['accel']
+try:
+    # Joy-ConのIDを取得
+    joycon_id = get_R_id()
+    joycon = JoyCon(*joycon_id)
 
-    # 加速度データ
-    accel_x = accel['x']
-    accel_y = accel['y']
-    accel_z = accel['z']
+    # 前回の加速度データを保持する変数を用意
+    prev_accel = {'x': 0, 'y': 0, 'z': 0}
 
-    # データ表示
-    print(f"加速度: X: {accel_x}, Y: {accel_y}, Z: {accel_z}")
-    print(f"ジャイロ: X: {gyro['x']}, Y: {gyro['y']}, Z: {gyro['z']}")
+    while True:
+        # Joy-Conのステータスを取得
+        status = joycon.get_status()
+        accel = status['accel']  # 加速度データ
+        
+        # 振る動作を検知 (例えばx軸方向の変化量が一定以上のとき)
+        accel_change = abs(accel['x'] - prev_accel['x'])
 
-    time.sleep(0.1)
+        # しきい値（ここでは50）を超えた場合に振ったとみなす
+        if accel_change > 7000:
+            score += 10  # 得点を加算
+            print(f"Joy-Conを振りました！得点: {score}")
+
+        # 現在の加速度データを前回のデータとして保存
+        prev_accel = accel
+
+        # ジャイロと加速度データを表示
+        print("加速度:", accel)
+        time.sleep(0.1)  # 0.1秒ごとにチェック
+
+except Exception as e:
+    print(f"エラーが発生しました: {e}")
