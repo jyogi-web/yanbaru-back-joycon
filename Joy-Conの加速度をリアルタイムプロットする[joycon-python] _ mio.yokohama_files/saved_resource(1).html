@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://b.hatena.ne.jp/entry/button/?url=https%3A%2F%2Fmio.yokohama%2F%3Fp%3D1205&lang=ja -->
+<html lang="ja" class="bbutton-html-wrapper"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>はてなブックマークボタン</title>
+<link rel="canonical" href="https://b.hatena.ne.jp/entry/s/mio.yokohama/?p=1205#bbutton">
+<link rel="stylesheet" href="./reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="./entry-button.css" type="text/css" media="all">
+
+<script>
+  function sendBeacon() {
+    
+  }
+  function clickHandler() {
+    var match = window.name.match(/^(\w+)\|((https?:\/\/[^\/?#]+)[^#]*)/);
+    if (!match) return;
+    window.parent.postMessage('HBMessage@{"type": "click"}', match[3]);
+  }
+</script>
+</head><body>
+
+
+  <div class="btn-standard lang-ja show-count" onclick="if (event.button === 0) { clickHandler(); return false; }">
+    <a href="https://b.hatena.ne.jp/entry/s/mio.yokohama/?p=1205#bbutton" target="_top" title="このエントリーをはてなブックマークに追加">
+      <span class="icon"></span>
+      
+    </a>
+    <a href="https://b.hatena.ne.jp/entry/s/mio.yokohama/?p=1205#bbutton" target="_blank" class="count" onclick="if (event.button === 0) { sendBeacon(); event.stopPropagation(); }">0</a>
+  </div>
+
+
+
+</body></html>
