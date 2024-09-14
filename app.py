@@ -1,22 +1,26 @@
-# app.py
-from flask import Flask
+from flask import Flask, jsonify
 import threading
 import joycon_module  # 修正したファイル名に合わせてインポート
 
 app = Flask(__name__)
+
+# Joy-Conのデータを保持する変数
+joycon_data = {"accel": {}, "score": 0}
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
 @app.route('/joycon')
-def get():
-    print("joycon")
-    # Joy-Conデータ取得を開始する関数を呼び出す
-    return "Joy-Con data acquisition started."
+def get_joycon_data():
+    global joycon_data  # グローバル変数を参照
+    print("Joy-Con data request received")
+    # 現在のJoy-Conデータを返す
+    return jsonify(joycon_data)
 
 def start_joycon_data_acquisition():
-    joycon_module.start_joycon_data_acquisition()
+    global joycon_data
+    joycon_module.start_joycon_data_acquisition(joycon_data)
 
 if __name__ == '__main__':
     # Joy-Conのデータ取得を別スレッドで開始
