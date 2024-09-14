@@ -1,9 +1,13 @@
-from pyjoycon import JoyCon, GyroTrackingJoyCon,   get_R_id
+from pyjoycon import JoyCon,    get_R_id
 import time
 from datetime import datetime
+import json
 
-# 得点を初期化
+# 初期化
 score = 0
+result = {}
+count = 0
+dlapsedtime=0
 
 try:
     # Joy-ConのIDを取得
@@ -16,11 +20,13 @@ try:
     # 開始タイム取得
     start_time = datetime.now()
 
+    print(f"ゲームスタート{start_time}秒")
+
     while True:
         # Joy-Conのステータスを取得
         status = joycon.get_status()
         accel = status['accel']  # 加速度データ
-        buttons = status['buttons']
+        button_right = status['buttons']['right']
         
         # 振る動作を検知 (軸方向の変化量が一定以上のとき)
         # 各軸の変化量を計算
@@ -30,16 +36,36 @@ try:
 
         # print(buttons['right'])
 
-        # しきい値（ここでは50）を超えた場合に振ったとみなす
+        # しきい値を超えた場合に振ったとみなす
         threshold = 3000
 
         if accel_change_x > threshold or accel_change_y > threshold or accel_change_z > threshold:
             score += 10  # 得点を加算
             print(f"Joy-Conを振りました！得点: {score}")
 
-        # 特定のボタンを押しているときに座標を取得
-        if buttons['right']['r']==1:
+        # 特定のボタンを押しているときに加速度・座標・時間を取得
+        if button_right['r']==1:
+            count+=1
+            data = {
+                'accel_change_x':accel_change_x,
+                'accel_change_y':accel_change_y,
+                'accel_change_z':accel_change_z,
+                'gyro_x':status['gyro']['x'],
+                'gyro_y':status['gyro']['y'],
+                'gyro_z':status['gyro']['z'],
+                'microseconds':dlapsedtime.microseconds
+            }
             print(status['gyro'])
+            result[count] = data
+            
+
+        # zrで終了
+        if button_right['zr']==1:
+            json.dumps(result)
+            print(result)
+            break
+
+
 
 
         # 現在の加速度データを前回のデータとして保存
