@@ -1,9 +1,14 @@
+
 bidict==0.23.1
 blinker==1.8.2
 click==8.1.7
 flask==3.0.3
 Flask-SocketIO==5.3.7
 h11==0.14.0
+blinker==1.8.2
+click==8.1.7
+colorama==0.4.6
+flask==3.0.3
 hidapi==0.14.0.post2
 importlib-metadata==8.5.0
 itsdangerous==2.2.0
@@ -16,4 +21,5 @@ python-socketio==5.11.4
 simple-websocket==1.0.0
 werkzeug==3.0.4
 wsproto==1.2.0
+werkzeug==3.0.4
 zipp==3.20.2

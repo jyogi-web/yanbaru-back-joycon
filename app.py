@@ -13,7 +13,7 @@ joycon_data = {"accel": {}, "score": 0}
 def index():
     return send_from_directory('.', 'index.html')
 
-@app.route('/joycon')
+@app.route('/joycon_data')
 def get_joycon_data():
     global joycon_data
     return jsonify(joycon_data)
@@ -26,6 +26,13 @@ def joycon_data_update_thread():
     while True:
         socketio.emit('joycon_update', joycon_data)
         socketio.sleep(0.5)
+# ↓ /joyconをGETメソッドで受け取った時の処理
+@app.route('/joycon')
+def get():
+    print("joycon")
+    # ↓実行したいファイルの関数
+    return joycon.Joycon()
+
 
 if __name__ == '__main__':
     # Joy-Conのデータ取得を別スレッドで開始
