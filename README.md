@@ -89,3 +89,16 @@ python joycon.py
 参考
 
 https://qiita.com/shun_sakamoto/items/7944d0ac4d30edf91fde
+
+### 記録
+Rで記録が始まりZRで終了して、JSONを出すようにする
+```
+python ButtonGetInfo.py
+```
+### スコアを表示
+フルとlocalhsot:5001にアクセスするとスコアが表示される
+
+```
+python app.py
+```
+
