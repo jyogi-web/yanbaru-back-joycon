@@ -55,7 +55,7 @@ windowsの場合
 ターミナルで(joycon) > みたいな感じになっているはずなのでそこで
 
 ```bash
-pip install joycon-python hidapi pyglm
+pip install joycon-python hidapi pyglm flask
 ```
 
 ちゃんと入ったか確認
