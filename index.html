@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy-ConのScore</title>
+</head>
+<body>
+    <h1>Joy-ConのScore</h1>
+    <div>
+        <p>Score: <span id="score">0</span></p>
+        <p>加速度: <span id="accel"></span></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+    <script>
+        // WebSocketの接続を確立
+        const socket = io('http://localhost:5001');
+
+        // サーバーからのデータ更新イベントをリッスン
+        socket.on('joycon_update', function(data) {
+            document.getElementById('score').innerText = data.score;
+            document.getElementById('accel').innerText = JSON.stringify(data.accel);
+        });
+    </script>
+</body>
+</html>
