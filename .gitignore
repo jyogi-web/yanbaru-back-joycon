@@ -1,1 +1,3 @@
 /joycon
+__pycache__/
+*.py[cod]
